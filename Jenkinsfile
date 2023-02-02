@@ -72,4 +72,6 @@ def imagePullTagPush(String SRC_IMAGE, String DEST_IMAGE, String SRC_REGISTRY_CR
     docker.withRegistry("https://${registryURI}",DST_REGISTRY_CRED){
     image_to_push.push()
     }
-}
+} /* NOTE: when you are using same image registry, then you have to create a seperate token for each dev,qa,
+stage,prod.... You can not use same token and create multiple credentials in jenkins. While creating
+multiple credentials for same registry you have to created multiple tokens.*/
