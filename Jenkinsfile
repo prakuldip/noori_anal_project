@@ -32,7 +32,7 @@ stages {
                     docker.build("${DEST_IMAGE}:${commitid}").push()
                     }
                     echo "Removing the image locally"
-                    sh "docker image rm '${registryURI}${registry}:$GIT_COMMIT'"
+                    sh "docker image rm '${DEST_IMAGE}'"
                 }
             }  
         }
@@ -50,6 +50,7 @@ stages {
             }
             steps{
               imagePullTagPush(SRC_IMAGE,DEST_IMAGE,SRC_REGISTRY_CRED,DST_REGISTRY_CRED)
+              echo "Removing images localy"
               sh "docker image rm '${SRC_IMAGE}' '${DEST_IMAGE}'"
             }  /* defining and calling function is successful*/
         }
@@ -66,7 +67,7 @@ def imagePullTagPush(String SRC_IMAGE, String DEST_IMAGE, String SRC_REGISTRY_CR
     docker.withRegistry("https://${registryURI}",SRC_REGISTRY_CRED){
     image_to_pull.pull()
     }
-    sh "docker image tag 'SRC_IMAGE' 'DEST_IMAGE'"
+    sh "docker image tag '${SRC_IMAGE}' '${DEST_IMAGE}'"
     def image_to_push = docker.image(DEST_IMAGE)
     docker.withRegistry("https://${registryURI}",DST_REGISTRY_CRED){
     image_to_push.push()
