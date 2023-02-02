@@ -13,7 +13,7 @@ pipeline {
     }
     parameters {
             choice(name: 'account', choices: ['dev', 'qa', 'stage', 'prod'], description: 'Select the environment')
-            string(name: 'commit_id', defaultValue: "${GIT_COMMIT}", description: 'provide commit id if specific.')
+            string(name: 'commit_id', defaultValue: "${env.GIT_COMMIT}", description: 'provide commit id if specific.')
         }
 stages {
         stage('build and push docker image in dev repo') {
