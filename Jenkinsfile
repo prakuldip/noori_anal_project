@@ -8,6 +8,7 @@ pipeline {
         prod_registry = "prakuldip/noori-anal-project-prod"
         dev_registryCredential = "dev-dh-cred"
         qa_registryCredential = "qa-dh-cred"
+        GIT_COMMIT = 
         commitid = "${params.commit_id}"
         
     }
