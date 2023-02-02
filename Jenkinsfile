@@ -9,13 +9,13 @@ pipeline {
         dev_registryCredential = "dev-dh-cred"
         qa_registryCredential = "qa-dh-cred"
         //commitid = "${params.commit_id}"
-        //gitcommit = $COMMIT_ID
+        gitcommit = "$COMMIT_ID"
         commitid = "${params.commit_id}"
         
     }
     parameters {
             choice(name: 'account', choices: ['dev', 'qa', 'stage', 'prod'], description: 'Select the environment')
-            string(name: 'commit_id', defaultValue: "${COMMIT_ID}", description: 'provide commit id if specific')
+            string(name: 'commit_id', defaultValue: "${env.gitcommit}", description: 'provide commit id if specific.')
         }
 stages {
         stage('build and push docker image in dev repo') {
