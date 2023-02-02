@@ -69,7 +69,7 @@ def imagePullTagPush(String SRC_IMAGE, String DEST_IMAGE, String SRC_REGISTRY_CR
     }
     sh "docker image tag '${SRC_IMAGE}' '${DEST_IMAGE}'"
     def image_to_push = docker.image(DEST_IMAGE)
-    docker.withRegistry("https://${registryURI}",SRC_REGISTRY_CRED){
+    docker.withRegistry("https://${registryURI}",DST_REGISTRY_CRED){
     image_to_push.push()
     }
 }
