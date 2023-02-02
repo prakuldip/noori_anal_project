@@ -29,7 +29,7 @@ stages {
             steps{
                 script {
                     docker.withRegistry("https://${env.registryURI}",DST_REGISTRY_CRED){
-                    docker.build("${DEST_IMAGE}:${commitid}").push()
+                    docker.build(DEST_IMAGE).push()
                     }
                     echo "Removing the image locally"
                     sh "docker image rm '${DEST_IMAGE}'"
