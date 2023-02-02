@@ -17,6 +17,11 @@ pipeline {
         }
 stages {
         stage('build and push docker image in dev repo') {
+            when {
+                    expression {
+                        params.account == 'dev'
+                    }
+            }
             environment{
               DEST_IMAGE = "${registryURI}${dev_registry}:${commitid}"
               DST_REGISTRY_CRED = "${dev_registryCredential}"
@@ -32,6 +37,11 @@ stages {
             }  
         }
         stage('pull from dev and push in to qa repo') {
+            when {
+                    expression {
+                        params.account == 'qa'
+                    }
+            }
             environment{
               SRC_IMAGE  = "${registryURI}${dev_registry}:${commitid}"
               DEST_IMAGE = "${registryURI}${qa_registry}:${commitid}"
