@@ -9,7 +9,7 @@ pipeline {
         dev_registryCredential = "dev-dh-cred"
         qa_registryCredential = "qa-dh-cred"
         //commitid = "${params.commit_id}"
-        gitcommit = "$COMMIT_ID"
+        gitcommit = "$GIT_COMMIT"
         commitid = "${params.commit_id}"
         
     }
